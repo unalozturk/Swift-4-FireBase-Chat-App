@@ -8,19 +8,23 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //print test
-        // Do any additional setup after loading the view, typically from a nib.
-    }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
     }
-
+    override var preferredStatusBarStyle: UIStatusBarStyle
+    {
+        return .lightContent
+    }
+    
+    @objc func handleLogout() {
+        present(LoginControllerViewController(), animated: true, completion: nil)
+    }
 
 }
+
+
 
