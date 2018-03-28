@@ -8,6 +8,8 @@
 
 import UIKit
 
+import Firebase
+
 class LoginControllerViewController: UIViewController {
     
     let inputContainerView : UIView =  {
@@ -26,8 +28,42 @@ class LoginControllerViewController: UIViewController {
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = UIColor(r: 80, g: 101, b: 161)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        button.addTarget(self, action: #selector(handleRegister), for: .touchUpInside)
         return button
     }()
+    
+    @objc func handleRegister() {
+        guard let email = emailTextField.text, let password = passwordTextField.text , let name = nameTextField.text else {
+            return
+        }
+        
+       
+        Auth.auth().createUser(withEmail: email, password: password) { (user: User?, error) in
+            if error != nil
+            {
+                print(error  ?? "")
+                return
+            }
+        }
+        
+        let uid = Auth.auth().currentUser!.uid
+        
+        //successfully auth
+        let ref = Database.database().reference(fromURL: "https://gameofchat-fd3cc.firebaseio.com/")
+        let values = ["name":name, "email": email]
+        let userReference = ref.child("users").child(uid)
+        userReference.updateChildValues(values) { (error, ref) in
+            if error != nil
+            {
+                print(error ?? "")
+                return
+            }
+        }
+        //ref = Database.database().reference(fromURL: "https://gameofchat-fd3cc.firebaseio.com/")
+        //ref.updateChildValues(["someValues" : 123432])
+        
+        
+    }
     
     let nameTextField : UITextField = {
         let tf = UITextField()
