@@ -21,15 +21,27 @@ class ViewController: UITableViewController {
         */
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
+        
+        if Auth.auth().currentUser?.uid == nil {
+            perform(#selector(handleLogout), with: nil, afterDelay: 0)
+        }
     }
+    @objc func handleLogout() {
+        do {
+            try Auth.auth().signOut()
+        } catch let logoutError {
+            print(logoutError)
+        }
+        present(LoginControllerViewController(), animated: true, completion: nil)
+    }
+    
+    
     override var preferredStatusBarStyle: UIStatusBarStyle
     {
         return .lightContent
     }
     
-    @objc func handleLogout() {
-        present(LoginControllerViewController(), animated: true, completion: nil)
-    }
+    
 
 }
 
