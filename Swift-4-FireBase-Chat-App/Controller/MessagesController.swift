@@ -60,9 +60,10 @@ class MessagesViewController: UITableViewController {
             return view
         }()
         
-        let titleView: UIView = {
-            let view = UIView()
+        let titleView: UIButton = {
+            let view = UIButton()
             view.frame = CGRect(x: 0, y: 0, width: 100, height: 40)
+            view.addTarget(self, action: #selector(showChatController), for: .touchUpInside)
             return view
         }()
         
@@ -74,7 +75,7 @@ class MessagesViewController: UITableViewController {
             containerView.centerYAnchor.constraint(equalTo: titleView.centerYAnchor),
         ].forEach { $0.isActive = true}
         
-        self.navigationItem.titleView = titleView
+       
         
         let navProfileImage: UIImageView = {
             let imgView = UIImageView()
@@ -110,17 +111,23 @@ class MessagesViewController: UITableViewController {
         //Constraints
         [
             nameLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            nameLabel.leadingAnchor.constraint(equalTo: navProfileImage.trailingAnchor),
+            nameLabel.leadingAnchor.constraint(equalTo: navProfileImage.trailingAnchor, constant: 8),
             nameLabel.heightAnchor.constraint(equalTo: navProfileImage.heightAnchor),
             nameLabel.centerYAnchor.constraint(equalTo:containerView.centerYAnchor)
             
         ].forEach { $0.isActive = true}
         
+
+        self.navigationItem.titleView = titleView
         
-       
         
         
         
+    }
+    
+    @objc func showChatController() {
+        let chatLogController =  ChatLogController(collectionViewLayout: UICollectionViewFlowLayout())
+        navigationController?.pushViewController(chatLogController, animated: true)
     }
     
     @objc func handleLogout() {

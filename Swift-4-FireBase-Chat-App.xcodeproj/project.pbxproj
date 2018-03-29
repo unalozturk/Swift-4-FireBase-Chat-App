@@ -18,6 +18,7 @@
 		1775B45E206CC47500BEE9D7 /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1775B45D206CC47500BEE9D7 /* user.swift */; };
 		1775B460206CE0D500BEE9D7 /* LoginController+handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1775B45F206CE0D500BEE9D7 /* LoginController+handler.swift */; };
 		420FC4D17E12DC1182D6D0EA /* Pods_Swift_4_FireBase_Chat_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FB78E12FC428BC5DD7F6471 /* Pods_Swift_4_FireBase_Chat_App.framework */; };
+		D687E115206D5A3F00BF67F2 /* ChatLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D687E114206D5A3F00BF67F2 /* ChatLogController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		1775B45F206CE0D500BEE9D7 /* LoginController+handler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginController+handler.swift"; sourceTree = "<group>"; };
 		6F1005E4225C4E9A5ABF1FF9 /* Pods-Swift-4-FireBase-Chat-App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swift-4-FireBase-Chat-App.release.xcconfig"; path = "Pods/Target Support Files/Pods-Swift-4-FireBase-Chat-App/Pods-Swift-4-FireBase-Chat-App.release.xcconfig"; sourceTree = "<group>"; };
 		7FB78E12FC428BC5DD7F6471 /* Pods_Swift_4_FireBase_Chat_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Swift_4_FireBase_Chat_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D687E114206D5A3F00BF67F2 /* ChatLogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogController.swift; sourceTree = "<group>"; };
 		DA1A66356D7DC1F61186345C /* Pods-Swift-4-FireBase-Chat-App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swift-4-FireBase-Chat-App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Swift-4-FireBase-Chat-App/Pods-Swift-4-FireBase-Chat-App.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -90,6 +92,7 @@
 				171A7B93206BC11000BFB8EB /* LoginController.swift */,
 				1775B45F206CE0D500BEE9D7 /* LoginController+handler.swift */,
 				17502424206CBFB30067C907 /* NewMessageController.swift */,
+				D687E114206D5A3F00BF67F2 /* ChatLogController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				1775B460206CE0D500BEE9D7 /* LoginController+handler.swift in Sources */,
 				17502425206CBFB30067C907 /* NewMessageController.swift in Sources */,
 				171A7B94206BC11000BFB8EB /* LoginController.swift in Sources */,
+				D687E115206D5A3F00BF67F2 /* ChatLogController.swift in Sources */,
 				171A7B83206BBDAB00BFB8EB /* MessagesController.swift in Sources */,
 				1775B45E206CC47500BEE9D7 /* user.swift in Sources */,
 				171A7B81206BBDAB00BFB8EB /* AppDelegate.swift in Sources */,
