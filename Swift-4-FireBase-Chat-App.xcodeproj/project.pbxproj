@@ -8,25 +8,31 @@
 
 /* Begin PBXBuildFile section */
 		171A7B81206BBDAB00BFB8EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171A7B80206BBDAB00BFB8EB /* AppDelegate.swift */; };
-		171A7B83206BBDAB00BFB8EB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171A7B82206BBDAB00BFB8EB /* ViewController.swift */; };
+		171A7B83206BBDAB00BFB8EB /* MessagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171A7B82206BBDAB00BFB8EB /* MessagesController.swift */; };
 		171A7B86206BBDAB00BFB8EB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 171A7B84206BBDAB00BFB8EB /* Main.storyboard */; };
 		171A7B88206BBDAB00BFB8EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 171A7B87206BBDAB00BFB8EB /* Assets.xcassets */; };
 		171A7B8B206BBDAB00BFB8EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 171A7B89206BBDAB00BFB8EB /* LaunchScreen.storyboard */; };
-		171A7B94206BC11000BFB8EB /* LoginControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171A7B93206BC11000BFB8EB /* LoginControllerViewController.swift */; };
+		171A7B94206BC11000BFB8EB /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171A7B93206BC11000BFB8EB /* LoginController.swift */; };
 		171A7B96206BD2F700BFB8EB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 171A7B95206BD2F700BFB8EB /* GoogleService-Info.plist */; };
+		17502425206CBFB30067C907 /* NewMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17502424206CBFB30067C907 /* NewMessageController.swift */; };
+		1775B45E206CC47500BEE9D7 /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1775B45D206CC47500BEE9D7 /* user.swift */; };
+		1775B460206CE0D500BEE9D7 /* LoginController+handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1775B45F206CE0D500BEE9D7 /* LoginController+handler.swift */; };
 		420FC4D17E12DC1182D6D0EA /* Pods_Swift_4_FireBase_Chat_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FB78E12FC428BC5DD7F6471 /* Pods_Swift_4_FireBase_Chat_App.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		171A7B7D206BBDAB00BFB8EB /* Swift-4-FireBase-Chat-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swift-4-FireBase-Chat-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		171A7B80206BBDAB00BFB8EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		171A7B82206BBDAB00BFB8EB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		171A7B82206BBDAB00BFB8EB /* MessagesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesController.swift; sourceTree = "<group>"; };
 		171A7B85206BBDAB00BFB8EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		171A7B87206BBDAB00BFB8EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		171A7B8A206BBDAB00BFB8EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		171A7B8C206BBDAB00BFB8EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		171A7B93206BC11000BFB8EB /* LoginControllerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginControllerViewController.swift; sourceTree = "<group>"; };
+		171A7B93206BC11000BFB8EB /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		171A7B95206BD2F700BFB8EB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		17502424206CBFB30067C907 /* NewMessageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageController.swift; sourceTree = "<group>"; };
+		1775B45D206CC47500BEE9D7 /* user.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = user.swift; sourceTree = "<group>"; };
+		1775B45F206CE0D500BEE9D7 /* LoginController+handler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginController+handler.swift"; sourceTree = "<group>"; };
 		6F1005E4225C4E9A5ABF1FF9 /* Pods-Swift-4-FireBase-Chat-App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swift-4-FireBase-Chat-App.release.xcconfig"; path = "Pods/Target Support Files/Pods-Swift-4-FireBase-Chat-App/Pods-Swift-4-FireBase-Chat-App.release.xcconfig"; sourceTree = "<group>"; };
 		7FB78E12FC428BC5DD7F6471 /* Pods_Swift_4_FireBase_Chat_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Swift_4_FireBase_Chat_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA1A66356D7DC1F61186345C /* Pods-Swift-4-FireBase-Chat-App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swift-4-FireBase-Chat-App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Swift-4-FireBase-Chat-App/Pods-Swift-4-FireBase-Chat-App.debug.xcconfig"; sourceTree = "<group>"; };
@@ -65,6 +71,7 @@
 		171A7B7F206BBDAB00BFB8EB /* Swift-4-FireBase-Chat-App */ = {
 			isa = PBXGroup;
 			children = (
+				1775B45C206CC46000BEE9D7 /* Model */,
 				171A7B92206BC0F300BFB8EB /* Controller */,
 				171A7B80206BBDAB00BFB8EB /* AppDelegate.swift */,
 				171A7B84206BBDAB00BFB8EB /* Main.storyboard */,
@@ -79,10 +86,20 @@
 		171A7B92206BC0F300BFB8EB /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				171A7B82206BBDAB00BFB8EB /* ViewController.swift */,
-				171A7B93206BC11000BFB8EB /* LoginControllerViewController.swift */,
+				171A7B82206BBDAB00BFB8EB /* MessagesController.swift */,
+				171A7B93206BC11000BFB8EB /* LoginController.swift */,
+				1775B45F206CE0D500BEE9D7 /* LoginController+handler.swift */,
+				17502424206CBFB30067C907 /* NewMessageController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		1775B45C206CC46000BEE9D7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1775B45D206CC47500BEE9D7 /* user.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		A9CD9CEBA82FACCD15561337 /* Pods */ = {
@@ -201,6 +218,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Swift-4-FireBase-Chat-App/Pods-Swift-4-FireBase-Chat-App-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -208,6 +226,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -238,8 +257,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				171A7B94206BC11000BFB8EB /* LoginControllerViewController.swift in Sources */,
-				171A7B83206BBDAB00BFB8EB /* ViewController.swift in Sources */,
+				1775B460206CE0D500BEE9D7 /* LoginController+handler.swift in Sources */,
+				17502425206CBFB30067C907 /* NewMessageController.swift in Sources */,
+				171A7B94206BC11000BFB8EB /* LoginController.swift in Sources */,
+				171A7B83206BBDAB00BFB8EB /* MessagesController.swift in Sources */,
+				1775B45E206CC47500BEE9D7 /* user.swift in Sources */,
 				171A7B81206BBDAB00BFB8EB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

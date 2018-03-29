@@ -10,7 +10,9 @@ import UIKit
 
 import Firebase
 
-class LoginControllerViewController: UIViewController {
+class LoginController: UIViewController {
+    
+    var messagesController: MessagesViewController?
     
     let inputContainerView : UIView =  {
         let view = UIView()
@@ -43,48 +45,20 @@ class LoginControllerViewController: UIViewController {
         guard let email = emailTextField.text, let passwordd = passwordTextField.text  else {
             return
         }
+      
         
         Auth.auth().signIn(withEmail: email, password: passwordd) { (user : User?, error) in
             if error != nil {
                 print(error ?? "")
                 return
             }
+            
+            self.messagesController?.fetchUserAndSetupNavBarTitle();
             self.dismiss(animated: true, completion: nil)
         }
         
     }
     
-    @objc func handleRegister() {
-        guard let email = emailTextField.text, let passwordd = passwordTextField.text , let name = nameTextField.text else {
-            return
-        }
-       
-        
-        Auth.auth().createUser(withEmail: email, password: passwordd) { (nil, error) in
-            if error != nil
-            {
-                print(error  ?? "")
-                return
-            }
-            
-            let uid = Auth.auth().currentUser?.uid
-            
-            //successfully auth
-            let ref = Database.database().reference(fromURL: "https://gameofchat-fd3cc.firebaseio.com/")
-            let values = ["name":name, "email": email]
-            let userReference = ref.child("users").child(uid!)
-            userReference.updateChildValues(values) { (error, ref) in
-                if error != nil
-                {
-                    print(error ?? "")
-                    return
-                }
-            }
-            
-            self.dismiss(animated: true, completion: nil)
-        }
-        
-    }
     
     let nameTextField : UITextField = {
         let tf = UITextField()
@@ -122,13 +96,17 @@ class LoginControllerViewController: UIViewController {
         return tf
     }()
     
-    let  profileImage : UIImageView = {
+    lazy var profileImage : UIImageView = {
         let imgv = UIImageView()
         imgv.contentMode = .scaleAspectFit
         imgv.image = UIImage(named: "got")
         imgv.translatesAutoresizingMaskIntoConstraints = false
+        imgv.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSelectProfileImageView)))
+        imgv.isUserInteractionEnabled = true
         return imgv
     }()
+    
+   
     
     let loginRegisterSegmentedControl : UISegmentedControl = {
         let sc = UISegmentedControl(items: ["Login","Register"])
@@ -227,7 +205,7 @@ class LoginControllerViewController: UIViewController {
             emailTextField.leadingAnchor.constraint(equalTo: inputContainerView.leadingAnchor),
             emailTextField.topAnchor.constraint(equalTo: nameSeperatorView.bottomAnchor),
             mailTextFieldHeightAnchor
-            ].forEach { $0.isActive=true}
+        ].forEach { $0.isActive=true}
         
         inputContainerView.addSubview(emailSeperatorView)
         
