@@ -91,6 +91,25 @@ class MessagesViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 72
     }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let message = messages[indexPath.row]
+        guard let chatPartnerId = message.chatPartnerId() else {return}
+        
+        let ref = Database.database().reference().child("users").child(chatPartnerId)
+        ref.observe(.value, with: { (snapshot) in
+            
+            guard let dictionary = snapshot.value as? [String:Any] else {return}
+            let user_ = user()
+            user_.id = chatPartnerId
+            user_.setValuesForKeys(dictionary)
+            self.showChatControllerForUser(user: user_)
+            
+            
+            
+        }, withCancel: nil)
+        
+        //showChatControllerForUser(user: <#T##user#>)
+    }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cellId")
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! Usercell
