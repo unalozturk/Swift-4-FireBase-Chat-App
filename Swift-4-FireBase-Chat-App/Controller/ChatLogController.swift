@@ -11,6 +11,12 @@ import Firebase
 
 class ChatLogController : UICollectionViewController, UITextFieldDelegate {
     
+    var user : user? {
+        didSet {
+            navigationItem.title = user?.name
+        }
+    }
+    
     lazy var inputTextField : UITextField = {
         let tf = UITextField()
         tf.translatesAutoresizingMaskIntoConstraints = false
@@ -22,8 +28,6 @@ class ChatLogController : UICollectionViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        navigationItem.title = "Chat Log Controller"
         
         collectionView?.backgroundColor  = .white
         
@@ -92,8 +96,23 @@ class ChatLogController : UICollectionViewController, UITextFieldDelegate {
     @objc func handleSend () {
         let ref  = Database.database().reference().child("messages")
         let childRef = ref.childByAutoId()
-        let values = ["text": inputTextField.text! ,"name": "Bran Stack"]
-        childRef.updateChildValues(values)
+        let toId = user!.id!
+        let fromId = Auth.auth().currentUser!.uid
+        let timeStamp: Any =  Int(Date().timeIntervalSince1970)
+        let values = ["text": inputTextField.text! ,"toId": toId,"fromId": fromId,"timeStamp": timeStamp]
+       // childRef.updateChildValues(values)
+        childRef.updateChildValues(values) { (error, dataBaseReference) in
+            if error != nil {
+                print(error ?? "" )
+                return
+            }
+            let userMessageRef = Database.database().reference().child("user-messages").child(fromId)
+            let messageId = childRef.key
+            userMessageRef.updateChildValues([messageId:1])
+            
+            let recipientUserMessagesRef = Database.database().reference().child("user-messages").child(toId)
+            recipientUserMessagesRef.updateChildValues([messageId:1])
+        }
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         handleSend()

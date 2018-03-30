@@ -15,6 +15,8 @@
 		171A7B94206BC11000BFB8EB /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171A7B93206BC11000BFB8EB /* LoginController.swift */; };
 		171A7B96206BD2F700BFB8EB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 171A7B95206BD2F700BFB8EB /* GoogleService-Info.plist */; };
 		17502425206CBFB30067C907 /* NewMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17502424206CBFB30067C907 /* NewMessageController.swift */; };
+		17515136206E1CF5002752F6 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17515135206E1CF5002752F6 /* Message.swift */; };
+		17515139206E2697002752F6 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17515138206E2697002752F6 /* UserCell.swift */; };
 		1775B45E206CC47500BEE9D7 /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1775B45D206CC47500BEE9D7 /* user.swift */; };
 		1775B460206CE0D500BEE9D7 /* LoginController+handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1775B45F206CE0D500BEE9D7 /* LoginController+handler.swift */; };
 		420FC4D17E12DC1182D6D0EA /* Pods_Swift_4_FireBase_Chat_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FB78E12FC428BC5DD7F6471 /* Pods_Swift_4_FireBase_Chat_App.framework */; };
@@ -32,6 +34,8 @@
 		171A7B93206BC11000BFB8EB /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		171A7B95206BD2F700BFB8EB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		17502424206CBFB30067C907 /* NewMessageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageController.swift; sourceTree = "<group>"; };
+		17515135206E1CF5002752F6 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		17515138206E2697002752F6 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		1775B45D206CC47500BEE9D7 /* user.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = user.swift; sourceTree = "<group>"; };
 		1775B45F206CE0D500BEE9D7 /* LoginController+handler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginController+handler.swift"; sourceTree = "<group>"; };
 		6F1005E4225C4E9A5ABF1FF9 /* Pods-Swift-4-FireBase-Chat-App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swift-4-FireBase-Chat-App.release.xcconfig"; path = "Pods/Target Support Files/Pods-Swift-4-FireBase-Chat-App/Pods-Swift-4-FireBase-Chat-App.release.xcconfig"; sourceTree = "<group>"; };
@@ -73,6 +77,7 @@
 		171A7B7F206BBDAB00BFB8EB /* Swift-4-FireBase-Chat-App */ = {
 			isa = PBXGroup;
 			children = (
+				17515137206E2682002752F6 /* Views */,
 				1775B45C206CC46000BEE9D7 /* Model */,
 				171A7B92206BC0F300BFB8EB /* Controller */,
 				171A7B80206BBDAB00BFB8EB /* AppDelegate.swift */,
@@ -97,10 +102,19 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		17515137206E2682002752F6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				17515138206E2697002752F6 /* UserCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		1775B45C206CC46000BEE9D7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				1775B45D206CC47500BEE9D7 /* user.swift */,
+				17515135206E1CF5002752F6 /* Message.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -265,6 +279,8 @@
 				171A7B94206BC11000BFB8EB /* LoginController.swift in Sources */,
 				D687E115206D5A3F00BF67F2 /* ChatLogController.swift in Sources */,
 				171A7B83206BBDAB00BFB8EB /* MessagesController.swift in Sources */,
+				17515139206E2697002752F6 /* UserCell.swift in Sources */,
+				17515136206E1CF5002752F6 /* Message.swift in Sources */,
 				1775B45E206CC47500BEE9D7 /* user.swift in Sources */,
 				171A7B81206BBDAB00BFB8EB /* AppDelegate.swift in Sources */,
 			);

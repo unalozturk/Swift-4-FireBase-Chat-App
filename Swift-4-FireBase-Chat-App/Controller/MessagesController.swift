@@ -11,6 +11,8 @@ import Firebase
 
 
 class MessagesViewController: UITableViewController {
+    
+    var cellId = "cellId"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,10 +20,89 @@ class MessagesViewController: UITableViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
         let image = UIImage(named: "new_message_icon")
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(handleNewMessage))
+        
        checkIfUserLoggedIn()
+       
+       tableView.register(Usercell.self, forCellReuseIdentifier: cellId)
+        
+      // observeMessages()
+        observeUserMessages()
     }
+    
+    var messages = [Message]()
+    var messagesDictionary = [String : Message]()
+    
+    func observeUserMessages() {
+        guard let uid = Auth.auth().currentUser?.uid else{return}
+        let ref = Database.database().reference().child("user-messages").child(uid)
+        ref.observe(.childAdded, with: { (snapshot) in
+            let messageId = snapshot.key
+            let messageRef = Database.database().reference().child("messages").child(messageId)
+            messageRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                if let dictionary = snapshot.value as? [String:Any] {
+                    let message = Message()
+                    message.setValuesForKeys(dictionary)
+                    // self.messages.append(message)
+                    
+                    if let messageToId = message.toId {
+                        self.messagesDictionary[messageToId] = message
+                        self.messages = Array(self.messagesDictionary.values)
+                        self.messages.sort {$0.timeStamp!.intValue > $1.timeStamp!.intValue }
+                    }
+                    
+                    
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                }
+                
+                
+            }, withCancel: nil)
+        }, withCancel: nil)
+    }
+    
+    func observeMessages() {
+        let ref = Database.database().reference().child("messages")
+        ref.observe(.childAdded, with: { (snapshot) in
+            if let dictionary = snapshot.value as? [String:Any] {
+                let message = Message()
+                message.setValuesForKeys(dictionary)
+               // self.messages.append(message)
+                
+                if let messageToId = message.toId {
+                     self.messagesDictionary[messageToId] = message
+                     self.messages = Array(self.messagesDictionary.values)
+                     self.messages.sort {$0.timeStamp!.intValue > $1.timeStamp!.intValue }
+                }
+               
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+            
+        }, withCancel: nil)
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return messages.count
+    }
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 72
+    }
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cellId")
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! Usercell
+        let message = messages[indexPath.row]
+        cell.message = message
+        return cell
+    }
+    
+    
     @objc func  handleNewMessage () {
         let newMessageController = NewMessageController()
+        newMessageController.messagesController = self
         let navBar = UINavigationController(rootViewController: newMessageController)
         present(navBar, animated: true, completion: nil)
         
@@ -52,6 +133,13 @@ class MessagesViewController: UITableViewController {
     
     func setupNavBarWithUser(user: user)
     {
+        messages.removeAll()
+        messagesDictionary.removeAll()
+        tableView.reloadData()
+        observeUserMessages()
+        
+        
+        
         self.navigationItem.title = user.name
         
         let containerView: UIView = {
@@ -63,7 +151,7 @@ class MessagesViewController: UITableViewController {
         let titleView: UIButton = {
             let view = UIButton()
             view.frame = CGRect(x: 0, y: 0, width: 100, height: 40)
-            view.addTarget(self, action: #selector(showChatController), for: .touchUpInside)
+          //  view.addTarget(self, action: #selector(showChatController), for: .touchUpInside)
             return view
         }()
         
@@ -125,8 +213,9 @@ class MessagesViewController: UITableViewController {
         
     }
     
-    @objc func showChatController() {
+    @objc func showChatControllerForUser(user: user) {
         let chatLogController =  ChatLogController(collectionViewLayout: UICollectionViewFlowLayout())
+        chatLogController.user = user
         navigationController?.pushViewController(chatLogController, animated: true)
     }
     
