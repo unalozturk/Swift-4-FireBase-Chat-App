@@ -9,25 +9,51 @@
 import UIKit
 
 class ChatMessageCell: UICollectionViewCell {
-    var textView: UITextView = {
+    
+    var bubbleWidthAnchor : NSLayoutConstraint?
+    
+    let textView: UITextView = {
        let tv = UITextView()
-       tv.text = "SIMPLEEEEE"
        tv.font = UIFont.systemFont(ofSize: 16)
-       tv.textAlignment = .right
+     //  tv.textAlignment = .center
+       tv.backgroundColor = .clear
+       tv.textColor = .white
        tv.translatesAutoresizingMaskIntoConstraints = false
-       tv.backgroundColor = .blue
+       
        return tv
+    }()
+    
+    let bubbleView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(r: 0, g: 137, b: 249)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = 15
+        view.layer.masksToBounds = true
+        return view
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        addSubview(bubbleView)
+        bubbleWidthAnchor = bubbleView.widthAnchor.constraint(equalToConstant:200)
+        [
+            bubbleView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -8),
+            bubbleView.topAnchor.constraint(equalTo: self.topAnchor),
+            bubbleWidthAnchor!,
+            bubbleView.heightAnchor.constraint(equalTo: self.heightAnchor)
+        ].forEach { $0.isActive=true}
+        
+        
         addSubview(textView)
         [
-            textView.rightAnchor.constraint(equalTo: self.rightAnchor),
-            textView.topAnchor.constraint(equalTo: self.topAnchor),
-            textView.widthAnchor.constraint(equalToConstant:200),
-            textView.heightAnchor.constraint(equalTo: self.heightAnchor)
+            textView.leftAnchor.constraint(equalTo: self.bubbleView.leftAnchor,constant: 8),
+            textView.topAnchor.constraint(equalTo: self.bubbleView.topAnchor),
+            textView.bottomAnchor.constraint(equalTo:self.bubbleView.bottomAnchor),
+            textView.rightAnchor.constraint(equalTo: self.bubbleView.rightAnchor)
         ].forEach { $0.isActive=true}
+        
+        
         
     }
     

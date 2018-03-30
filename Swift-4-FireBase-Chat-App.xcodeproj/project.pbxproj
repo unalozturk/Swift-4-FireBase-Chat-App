@@ -425,8 +425,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 92S3832N58;
+				DEVELOPMENT_TEAM = 77J9PH92MT;
 				INFOPLIST_FILE = "Swift-4-FireBase-Chat-App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "unalozturk.Swift-4-FireBase-Chat-App";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -441,8 +442,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 92S3832N58;
+				DEVELOPMENT_TEAM = 77J9PH92MT;
 				INFOPLIST_FILE = "Swift-4-FireBase-Chat-App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "unalozturk.Swift-4-FireBase-Chat-App";
 				PRODUCT_NAME = "$(TARGET_NAME)";
