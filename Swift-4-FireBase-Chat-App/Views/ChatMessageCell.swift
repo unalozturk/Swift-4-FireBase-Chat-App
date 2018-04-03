@@ -21,7 +21,7 @@ class ChatMessageCell: UICollectionViewCell {
        tv.backgroundColor = .clear
        tv.textColor = .white
        tv.translatesAutoresizingMaskIntoConstraints = false
-       
+       tv.isEditable = false
        return tv
     }()
     
@@ -38,11 +38,19 @@ class ChatMessageCell: UICollectionViewCell {
     
     let profileImageView : UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named:"nedstark")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 16
         imageView.layer.masksToBounds = true
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
+        return imageView
+    }()
+    
+    let messageImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.layer.cornerRadius = 16
+        imageView.layer.masksToBounds = true
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
@@ -74,6 +82,15 @@ class ChatMessageCell: UICollectionViewCell {
             profileImageView.heightAnchor.constraint(equalToConstant: 32),
             profileImageView.widthAnchor.constraint(equalToConstant: 32),
             profileImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+        ].forEach { $0.isActive=true}
+        
+        
+       bubbleView.addSubview(messageImageView)
+       [
+            bubbleView.topAnchor.constraint(equalTo: self.bubbleView.topAnchor),
+            bubbleView.bottomAnchor.constraint(equalTo: self.bubbleView.bottomAnchor),
+            bubbleView.trailingAnchor.constraint(equalTo: self.bubbleView.trailingAnchor),
+            bubbleView.leadingAnchor.constraint(equalTo: self.bubbleView.leadingAnchor)
         ].forEach { $0.isActive=true}
         
         
