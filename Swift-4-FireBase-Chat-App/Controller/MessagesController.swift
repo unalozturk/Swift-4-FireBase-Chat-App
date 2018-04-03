@@ -36,55 +36,49 @@ class MessagesViewController: UITableViewController {
         guard let uid = Auth.auth().currentUser?.uid else{return}
         let ref = Database.database().reference().child("user-messages").child(uid)
         ref.observe(.childAdded, with: { (snapshot) in
-            let messageId = snapshot.key
-            let messageRef = Database.database().reference().child("messages").child(messageId)
-            messageRef.observeSingleEvent(of: .value, with: { (snapshot) in
-                
-                if let dictionary = snapshot.value as? [String:Any] {
-                    let message = Message()
-                    message.setValuesForKeys(dictionary)
-                    // self.messages.append(message)
-                    
-                    if let chatPartnerId = message.chatPartnerId() {
-                        self.messagesDictionary[chatPartnerId] = message
-                        self.messages = Array(self.messagesDictionary.values)
-                        self.messages.sort {$0.timeStamp!.intValue > $1.timeStamp!.intValue }
-                    }
-                    
-                    
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
-                }
-                
-                
+            let userId = snapshot.key
+            Database.database().reference().child("user-messages").child(uid).child(userId).observe(.childAdded, with: { (snapshot) in
+                print(snapshot)
+                let messageId = snapshot.key
+                self.fetchMessageWithMessageId(messageId: messageId)
             }, withCancel: nil)
+            return
         }, withCancel: nil)
     }
-    
-    func observeMessages() {
-        let ref = Database.database().reference().child("messages")
-        ref.observe(.childAdded, with: { (snapshot) in
+    private func fetchMessageWithMessageId(messageId:String){
+        let messageRef = Database.database().reference().child("messages").child(messageId)
+        messageRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            
             if let dictionary = snapshot.value as? [String:Any] {
                 let message = Message()
                 message.setValuesForKeys(dictionary)
-               // self.messages.append(message)
+                // self.messages.append(message)
                 
-                if let messageToId = message.toId {
-                     self.messagesDictionary[messageToId] = message
-                     self.messages = Array(self.messagesDictionary.values)
-                     self.messages.sort {$0.timeStamp!.intValue > $1.timeStamp!.intValue }
+                if let chatPartnerId = message.chatPartnerId() {
+                    self.messagesDictionary[chatPartnerId] = message
+                    
                 }
-               
-                
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
+                //To reloadedData, we have to use trick for loading correct images
+                self.attemptReloadOfTable()
             }
-            
         }, withCancel: nil)
     }
+    func attemptReloadOfTable() {
+        self.reloadtimer.invalidate()
+        self.reloadtimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.handleReloadTable), userInfo: nil, repeats: false)
+    }
     
+    var reloadtimer = Timer()
+    
+    @objc func handleReloadTable() {
+        self.messages = Array(self.messagesDictionary.values)
+        self.messages.sort {$0.timeStamp!.intValue > $1.timeStamp!.intValue }
+        
+        DispatchQueue.main.async {
+            print("we reloaded table")
+            self.tableView.reloadData()
+        }
+    }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messages.count
     }
@@ -154,7 +148,8 @@ class MessagesViewController: UITableViewController {
     {
         messages.removeAll()
         messagesDictionary.removeAll()
-        tableView.reloadData()
+        //perform(#selector(reloadTableView), with: nil, afterDelay: 0.3)
+        self.tableView.reloadData()
         observeUserMessages()
         
         
@@ -230,6 +225,9 @@ class MessagesViewController: UITableViewController {
         
         
         
+    }
+    @objc func reloadTableView() {
+        self.tableView.reloadData()
     }
     
     @objc func showChatControllerForUser(user: user) {
