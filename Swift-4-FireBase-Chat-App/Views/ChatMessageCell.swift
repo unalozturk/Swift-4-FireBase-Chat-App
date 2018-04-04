@@ -10,6 +10,8 @@ import UIKit
 
 class ChatMessageCell: UICollectionViewCell {
     
+    var chatLogController : ChatLogController?
+    
     var bubbleWidthAnchor : NSLayoutConstraint?
     var bubbleLeftAnchor : NSLayoutConstraint?
     var bubbleRightAnchor : NSLayoutConstraint?
@@ -45,14 +47,24 @@ class ChatMessageCell: UICollectionViewCell {
         return imageView
     }()
     
-    let messageImageView: UIImageView = {
+    lazy var messageImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.cornerRadius = 16
         imageView.layer.masksToBounds = true
         imageView.contentMode = .scaleAspectFill
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleZoomTap)))
         return imageView
     }()
+    
+    @objc func handleZoomTap(tapGesture: UITapGestureRecognizer){
+        print("handling zoom")
+        if let imageView = tapGesture.view as? UIImageView {
+              self.chatLogController?.performZoomInForStartingImageView(startingImageView: imageView)
+        }
+      
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -87,11 +99,11 @@ class ChatMessageCell: UICollectionViewCell {
         
        bubbleView.addSubview(messageImageView)
        [
-            bubbleView.topAnchor.constraint(equalTo: self.bubbleView.topAnchor),
-            bubbleView.bottomAnchor.constraint(equalTo: self.bubbleView.bottomAnchor),
-            bubbleView.trailingAnchor.constraint(equalTo: self.bubbleView.trailingAnchor),
-            bubbleView.leadingAnchor.constraint(equalTo: self.bubbleView.leadingAnchor)
-        ].forEach { $0.isActive=true}
+            messageImageView.topAnchor.constraint(equalTo: self.bubbleView.topAnchor),
+            messageImageView.bottomAnchor.constraint(equalTo: self.bubbleView.bottomAnchor),
+            messageImageView.trailingAnchor.constraint(equalTo: self.bubbleView.trailingAnchor),
+            messageImageView.leadingAnchor.constraint(equalTo: self.bubbleView.leadingAnchor)
+       ].forEach { $0.isActive=true}
         
         
         
