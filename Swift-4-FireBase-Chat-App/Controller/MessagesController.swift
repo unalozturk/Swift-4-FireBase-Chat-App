@@ -24,10 +24,42 @@ class MessagesViewController: UITableViewController {
        checkIfUserLoggedIn()
        
        tableView.register(Usercell.self, forCellReuseIdentifier: cellId)
+        //swipe left
+       tableView.allowsMultipleSelection = true
         
       // observeMessages()
         observeUserMessages()
     }
+    //swipe left
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
+        let message = self.messages[indexPath.row]
+        if let chatPartneriD = message.chatPartnerId(){
+            Database.database().reference().child("user-name").child(uid).child(chatPartneriD).removeValue(completionBlock: { (error, ref) in
+                if error != nil {
+                    print("Failed to delete message: ",error ?? "")
+                    return
+                }
+                
+                self.messagesDictionary.removeValue(forKey: chatPartneriD)
+                self.attemptReloadOfTable()
+                
+                //This is one way
+              //  self.messages.remove(at: indexPath.row)
+              //  self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            })
+        }
+        
+        
+        
+        
+    }
+    //end swipe left
     
     var messages = [Message]()
     var messagesDictionary = [String : Message]()
@@ -43,6 +75,12 @@ class MessagesViewController: UITableViewController {
                 self.fetchMessageWithMessageId(messageId: messageId)
             }, withCancel: nil)
             return
+        }, withCancel: nil)
+        
+        ref.observe(.childRemoved, with: { (snapshot) in
+            print(snapshot.key)
+            self.messagesDictionary.removeValue(forKey: snapshot.key)
+            self.attemptReloadOfTable()
         }, withCancel: nil)
     }
     private func fetchMessageWithMessageId(messageId:String){
